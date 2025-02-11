@@ -5,8 +5,49 @@
 <style>
   body {
       font-family: 'Ubuntu', sans-serif;
+      font-size: 30px; /* Adjust this value to make text larger or smaller */
   }
 </style>
+
+
+
+<style>
+  /* Style for floating image */
+  .right-float {
+    float: right;       /* Floats the image to the right */
+    width: 450px;       /* Set the width to make it smaller */
+    height: auto;       /* Maintain aspect ratio */
+    margin: 0 0 10px 10px; /* Add spacing */
+  }
+</style>
+
+
+<style>
+  /* Style for floating image */
+  .left-float {
+    float: left;       /* Floats the image to the right */
+    width: 500px;       /* Set the width to make it smaller */
+    height: auto;       /* Maintain aspect ratio */
+    margin: 0 0 10px 10px; /* Add spacing */
+  }
+</style>
+
+
+<script type="text/javascript">
+  MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)'], ['$', '$']],
+      displayMath: [['\\[','\\]'], ['$$','$$']],
+      packages: { '[+]': ['colorv2'] }
+
+    }
+  };
+</script>
+
+
+<script type="text/javascript" async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 
 
 <head>
@@ -180,68 +221,443 @@
 
 <!-- Paper abstract -->
 <section class="section hero is-light">
-  <div class="container is-max-desktop">
+  <!-- Use Bulma's is-max-fullhd for a wider container -->
+  <div class="container is-max-fullhd">
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
+      <!-- Optional: keep or change is-three-quarters to is-full to make columns even wider -->
+      <div class="column is-three-quarters">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-              Latent generative models have emerged as a leading approach for high-quality image synthesis. These models rely on an autoencoder to compress images into a latent space, followed by a generative model to learn the latent distribution. 
-              We identify that existing autoencoders lack equivariance to semantic-preserving transformations like scaling and rotation, resulting in complex latent spaces that hinder generative performance. To address this, we propose <strong> <code>EQ-VAE</code></strong>, a simple regularization approach that enforces equivariance in the latent space, reducing its complexity without degrading reconstruction quality.
-              By fine-tuning pre-trained autoencoders with <strong>our method</strong>, we enhance the performance of several state-of-the-art generative models, including <code>DiT</code>, <code>SiT</code>, <code>REPA</code>, and <code>MaskGIT</code>, achieving a <strong>&times;7 speedup</strong> on <code>DiT-XL/2</code> with only five epochs of <code>SD-VAE</code> fine-tuning. <strong>Our method</strong> is compatible with both continuous and discrete autoencoders, thus offering a versatile enhancement for a wide range of latent generative models.
-          </div>
+            Latent generative models have emerged as a leading approach for high-quality image synthesis. 
+            These models rely on an autoencoder to compress images into a latent space, followed by a generative 
+            model to learn the latent distribution. We identify that existing autoencoders lack equivariance 
+            to semantic-preserving transformations like scaling and rotation, resulting in complex latent spaces 
+            that hinder generative performance. 
+            To address this, we propose <strong><code>EQ-VAE</code></strong>, a simple regularization approach 
+            that enforces equivariance in the latent space, reducing its complexity without degrading reconstruction 
+            quality. By fine-tuning pre-trained autoencoders with <strong>our method</strong>, we enhance the 
+            performance of several state-of-the-art generative models, including <code>DiT</code>, <code>SiT</code>, 
+            <code>REPA</code>, and <code>MaskGIT</code>, achieving a <strong>×7 speedup</strong> on 
+            <code>DiT-XL/2</code> with only five epochs of <code>SD-VAE</code> fine-tuning. 
+            <strong>Our method</strong> is compatible with both continuous and discrete autoencoders, 
+            thus offering a versatile enhancement for a wide range of latent generative models.
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </section>
-<!-- End paper abstract -->
 
-<!-- <br>
-<br>
 
-<section class="hero teaser">
-  <div class="container is-max-desktop" style="padding-left: 0; padding-right: 0;">
-    <div class="hero-body" style="padding-left: 0; padding-right: 0;">
-      
-      <center><h2 class="title is-3">Method</h2></center>
-      <br>
+<section class="section hero"></section>
+  <!-- Use Bulma's is-max-fullhd for a wider container -->
+  <div class="container is-max-fullhd">
+    <div class="columns is-centered has-text-centered">
+      <!-- Optional: keep or change is-three-quarters to is-full to make columns even wider -->
+      <div class="column is-three-quarters">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+          <p>
+            <span class="has-text-weight-bold is-size-4" 
+            style="display: inline-block; margin-right: 0.5rem;">
+        Motivation:
+        </span>
+            Our work is motivated by a key observation: state-of-the-art autoencoders, 
+            such as <code>SD-VAE</code>, produce latent representations 
+            that <strong>are not equivariant</strong> under basic spatial transformations 
+            like scaling and rotation. To test this, we applied scaling and rotations directly 
+            to the latent code and evaluated the corresponding reconstructions. While 
+            autoencoders reconstruct images accurately when transformations are applied 
+            to the input (i.e., \( \mathcal{D}(\mathcal{E}(\mathbf{\tau} \circ \mathbf{x})) \)), 
+            applying transformations directly to the latent representation 
+            (i.e., \( \mathcal{D}(\mathbf{\tau} \circ \mathcal{E}(\mathbf{x})) \)) leads
+            to significant degradation in reconstruction quality:
+          </p>
+          <div class="container is-fullhd" style="max-width: 80%; padding: 0 5%;">
+            <div class="hero-body" style="width: 100%;">
+              <img src="static/images/example_page/latent_scale.png" alt="Intro Image" id="tree" style="height: 100%; width: 100%; object-fit: cover;">
+              <h2 class="subtitle has-text-left" style="font-size: 1rem; max-width: 100%; margin: auto;">
 
-      <br>
-      <img src="static/images/method_new_color.drawio.png" alt="Intro Image" id="tree" style="transform: scale(1.2); object-fit: cover; width: 100%;">
 
-      <h2 class="subtitle" style="margin-left: 0; margin-right: 0; text-align: justify;">
-      <br>
-      <ul>
-        <li> &bull; Firstly, we utilize the row space of the Jacobian \( J_\mathcal{H} \) constrained to each specified region, which is obtained by its Singular Value Decomposition (SVD).</li>
-        <br>
+              </h2>
+            </div>
+          </div>
 
-        <li>  &bull; The row space  \( \text{row}(J_\mathcal{H}) \) is spanned by directions that manipulate the attributes in each region of interest.</li>
-        <br>
-        <li> &bull; To achieve local manipulation, we propose decomposing the Jacobian associated with each region of interest into two distinct components: a joint and an individual component.</li>
-        <br>
-        <li>&bull; The row space of the joint component comprises latent directions that induce global changes across the entire image.</li>
-        <br>
-        <li> &bull; In contrast, the row space of the individual component, <i>which is orthogonal to the joint </i>, is spanned by latent directions that specifically target a designated region of interest without influencing other regions.</li>
-        <br>
-        <li>&bull; To obtain this decomposition, we utilize the so-called Joint and Individual Variation Explained (JIVE) method.</li>
-      </ul>
-      </h2>
+
+          <!-- Paragraph 2 -->
+          <p>
+            <span class="has-text-weight-bold is-size-4" 
+            style="display: inline-block; margin-right: 0.5rem;">
+            Equivariance Regularization:
+        </span>
+            To overcome this limitation, we propose a regularization objective that aligns 
+            the reconstructions of transformed latent representations 
+            (\(\mathcal{D}\big( \tau \circ \mathcal{E}(\mathbf{x}) \big)\)) with the corresponding 
+            transformed inputs (\(\tau \circ \mathbf{x}\)). Specifically, we modify the original 
+            training objective of \(\mathcal{L}_{\text{VAE}}\) as follows:
+          </p>
+    
+          <!-- Equation (centered by default in MathJax) -->
+          \[
+          \begin{aligned}
+            \mathcal{L}_{\text{EQ-VAE}} (\mathbf{x}, \textcolor[RGB]{225,0,100}{\tau})
+              &= \mathcal{L}_{rec}\Big(
+                    \textcolor[RGB]{225,0,100}{\mathbf{\tau} \circ} \mathbf{x},\,
+                    \mathcal{D}\bigl(
+                      \textcolor[RGB]{225,0,100}{\mathbf{\tau} \circ}\mathcal{E}(\mathbf{x})
+                    \bigr)
+                  \Big)
+               + \lambda_{gan}\,\mathcal{L}_{gan}\Big(
+                      \mathcal{D}\bigl(
+                        \textcolor[RGB]{225,0,100}{\mathbf{\tau} \circ}\mathcal{E}(\mathbf{x})
+                      \bigr)
+                    \Big)
+                  + \lambda_{reg}\,\mathcal{L}_{reg} \notag
+          \end{aligned}
+          \]
+          Notice that when \(\textcolor[RGB]{225,0,100}{\mathbf{\tau} }\)           is the identity transformation, this formulation reduces to the original objective of <code> SD-VAE </code>
+          We focus on two types of spatial transformations: \<strong>anisotropic scaling and rotations </strong>. These are parameterized as: 
+
+          \[
+          \mathbf{S}(s_x, s_y) =
+            \begin{bmatrix}
+            s_x  & 0 \\
+            0 &  s_y
+            \end{bmatrix}    
+            ,\quad 
+            \mathbf{R}(\theta)=
+            \begin{bmatrix}
+            \cos\theta & -\sin\theta \\
+            \sin\theta &   \cos\theta
+            \end{bmatrix} 
+          \]
+
+            The final transformation is the composition of scaling and rotation:
+            \(\tau = \mathbf{S}(s_x, s_y) \cdot \mathbf{R}(\theta)\).
+            We sample uniformly \(0.25 < s_x, s_y < 1\), and
+            \(\theta \in \left(\frac{\pi}{2}, \pi, \tfrac{3\pi}{2}\right)\).
+
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Image carousel -->
-
-
- -->
 
 
 
+<section class="section hero"></section>
+  <!-- Use Bulma's is-max-fullhd for a wider container -->
+  <div class="container is-max-fullhd">
+    <div class="columns is-centered has-text-centered">
+      <!-- Optional: keep or change is-three-quarters to is-full to make columns even wider -->
+      <div class="column is-three-quarters">
+        <h2 class="title is-3">Results</h2>
+        <div class="content has-text-justified">
+          <p>
+            We demontrate images generated by two <code>DiT-XL/2 </code> models for 50K 100K and 400K iterations, one trained on the latent distribution of the standard <code>SD-VAE </code> and one on our regularized <code>EQ-VAE </code>. Both models share the same noise and number of sampling steps. The model trained on <code> EQ-VAE </code> is significantly speed-up.
+           </p>
+           <div class="container" style="max-width: 1800px; margin: 0 auto;">
+            <div class="hero-body" style="text-align: center;">
+              <!-- Increase the width or remove object-fit if you don't want the image cropped -->
+              <img 
+                src="static/images/example_page/speedup.png" 
+                alt="Intro Image" 
+                id="tree"
+                style="width: 100%; height: auto; object-fit: cover;"
+              >
+              <h2 class="subtitle has-text-left" style="font-size: 1rem; margin: auto;">
 
 
-<!-- 
-<!--BibTex citation -->
-  <!-- <section class="section" id="BibTeX">
+                <!-- Your subtitle or description here -->
+              </h2>
+            </div>
+         </div>
+          
+          <p>
+
+           <strong>(Table Left)</strong> Our regularization seamlessly adapts to both continuous and discrete autoencoders. Finetuning
+           pretrained autoencoders with <code> EQ-VAE</code> reduces the equivariance error under spatal transformations aligned
+          results in enhancement in generetaive performance (gFID) while maintaining the prior reconstruction capabilities (rFID).
+          <strong>(Table Right)</strong> State-of-the-art diffusion transormer models experience significant perfmance boost when 
+          trained on the latent representations on <code> EQ-VAE</code> 
+          
+          </p>
+          <div class="container" style="max-width: 1200px; margin: 0 auto;">
+            <div class="columns">
+              <!-- First Column -->
+              <div class="column">
+                <figure class="image">
+                  <img 
+                    src="static/images/tab_autoencoders.png" 
+                    alt="Figure 1" 
+                    style="width: 120%; max-width: 700px; height: auto; object-fit: cover;"
+                  />
+                </figure>
+                <h2 class="subtitle has-text-left" style="font-size: 1.2rem; margin: auto;">
+                </h2>
+              </div>
+          
+              <!-- Second Column -->
+              <div class="column">
+                <figure class="image">
+                  <img 
+                    src="static/images/tab_diff.png" 
+                    alt="Figure 2" 
+                    style="width: 120%; max-width: 700px; height: auto; object-fit: cover;"
+                  />
+                </figure>
+                <h2 class="subtitle has-text-left" style="font-size: 1.2rem; margin: auto;">
+                </h2>
+              </div>
+            </div>
+          </div>
+          
+          <p>
+            
+
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section hero"></section>
+  <!-- Use Bulma's is-max-fullhd for a wider container -->
+  <div class="container is-max-fullhd">
+    <div class="columns is-centered has-text-centered">
+      <!-- Optional: keep or change is-three-quarters to is-full to make columns even wider -->
+      <div class="column is-three-quarters">
+        <h2 class="title is-3">Analysis</h2>
+        <div class="content has-text-justified">
+          
+
+          <p>
+            <img src="static/images/epochs.png" alt="An example image" class="right-float">
+            <br>
+            <strong>How fast is <code> EQ-VAE</code> regularization?</strong> 
+            We train a
+          DiT-B/2 model on the resulting latent distribution of each
+          epoch and present the results in
+            Even
+            with a few epoch of fine-tuning with <code> EQ-VAE</code>, the gFID
+            drops significant, highlighting the rapid refinement
+            our objective achieves in the latent manifold.
+          </p>
+          
+
+          <br>
+          <br>
+          <p>
+            <img src="static/images/abblation.png" alt="An example image" class="left-float">
+
+            <strong>Latent space complexity and generative performance. </strong> We observe a correlation be-
+            tween the intrinsic dimension of the latent manifold and
+            the resulting generative performance. This suggests that the
+            regularized latent becomes simpler to model.
+            
+          </p>
+          
+
+
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <center><h2 class="title is-2">Additional Visualizations</h2></center>
+      <br>
+      <center><h4 class="title is-4">Latent representations w/ and wo/ EQ-VAE</h4></center>
+      For a better demontration of the effect of our regularization we illustrate the latent representations of consecutive video frames.
+
+      <div id="results-carousel" class="carousel results-carousel">
+
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSD-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdvae/0.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSD-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdvae/1.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSD-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdvae/2.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSD-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdvae/3.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSD-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdvae/4.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSD-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdvae/5.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSD-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdvae/6.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSD-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdvae/7.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+
+
+      </div>
+
+
+
+      <div id="results-carousel" class="carousel results-carousel">
+
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSDXL-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdxl/0.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSDXL-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdxl/1.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSDXL-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdxl/2.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSDXL-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdxl/3.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSDXL-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdxl/4.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSDXL-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdxl/5.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSDXL-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdxl/6.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSDXL-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdxl/7.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+
+
+      </div>
+ 
+
+
+
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+  <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <center><h2 class="title">Cite Us</h2></center>
       <head>
@@ -285,11 +701,12 @@
     <div class="code-container">
         <button class="copy-btn" onclick="copyToClipboard()">Copy</button>
         <pre><code id="code-snippet">
-    @inproceedings{localdiff,
-      title = {Enabling Local Editing in Diffusion Models by Joint and Individual Component Analysis},
-      author = {Kouzelis, Theodoros and Manos, Plitsis and Mihalis A., Nikolaou and Yiannis, Panagakis},
-      booktitle = {BMVC},
-      year = {2024},
+    @inproceedings{eqvae,
+      title = {EQ-VAE: Equivariance Regularized Latent Space for
+        Improved Generative Image Modeling},
+      author = {Kouzelis, Theodoros and Ioannis, Kakogeorgiou and Spyros, Gidraris and Nikos, Komodakis},
+      booktitle = {arxiv},
+      year = {2025},
     }
         </code></pre>
     </div>
