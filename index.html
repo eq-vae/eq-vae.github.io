@@ -170,7 +170,7 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
 
               <!-- Github link -->
               <span class="link-block">
-                <a href="https://github.com/YOUR_REPO_HERE" target="_blank"
+                <a href="https://github.com/zelaki/eqvae" target="_blank"
                   class="external-link button is-large is-rounded is-dark">
                   <span class="icon">
                     <i class="fab fa-github"></i>
@@ -211,7 +211,7 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     <div class="hero-body" style="width: 100%;">
       <img src="static/images/example_page/teaser.png" alt="Intro Image" id="tree" style="height: 100%; width: 100%; object-fit: cover;">
       <h2 class="subtitle has-text-left" style="font-size: 1rem; max-width: 100%; margin: auto;">
-        <strong>Latent Space Structure (Left)</strong> Top three principal components of <code>SD-VAE</code> and <code>SDXL-VAE</code>, with and without our method, demonstrating visually that our regularization produces smoother latent representations without compromising reconstruction.  
+        <strong>Latent Space Structure (Left)</strong> Top three principal components of <code>SD-VAE</code> and <code>SDXL-VAE</code>, with and without our method, demonstrating visually that our regularization produces smoother latent representations.  
         <strong>Accelerated Training (Right)</strong> Training curves (without classifier-free guidance) for <code>DiT-XL/2</code> and <code>REPA (w/ SiT-XL/2)</code>.
       </h2>
     </div>
@@ -248,6 +248,185 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </div>
   </div>
 </section>
+
+
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <br>
+      <center><h4 class="title is-3">Latent representations with EQ-VAE</h4></center>
+      We demontration of the effect of our regularization by illustrating the latent representations of consecutive video frames.
+
+      <div id="results-carousel" class="carousel results-carousel">
+
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSD-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdvae/0.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSD-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdvae/1.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSD-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdvae/2.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSD-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdvae/3.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSD-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdvae/4.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSD-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdvae/5.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSD-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdvae/6.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSD-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdvae/7.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+
+
+      </div>
+
+
+
+      <div id="results-carousel" class="carousel results-carousel">
+
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSDXL-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdxl/0.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSDXL-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdxl/1.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSDXL-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdxl/2.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSDXL-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdxl/3.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSDXL-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdxl/4.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSDXL-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdxl/5.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSDXL-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdxl/6.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+        <div class="item item-video1">
+          <center><h5 class="title is-5"><span style="margin-right: 280px;">   
+            &nbsp;&nbsp;&nbspImage</span>
+            <span style="margin-right: 270px;">
+              &nbsp;&nbsp;&nbspSDXL-VAE</span>
+            <span>+EQ-VAE</span>
+          </h5></center>
+          <center><img src="static/gifs/sdxl/7.gif" alt="Dynamic Latent Projection" id="gif1" style="height: 80%; width: 80%; object-fit: cover;"></center>
+        </div>
+
+
+      </div>
+ 
+
+
+
+    </div>
+  </div>
+</section>
+
+
+
 
 
 <section class="section hero"></section>
@@ -481,7 +660,7 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
 
 
 
-
+<!-- 
 <section class="hero is-small">
   <div class="hero-body">
     <div class="container">
@@ -657,7 +836,7 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
   </div>
 </section>
 
-
+ -->
 
 
 
@@ -668,6 +847,7 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>EQ-VAE</title>
         <style>
             .code-container {
                 position: relative;
