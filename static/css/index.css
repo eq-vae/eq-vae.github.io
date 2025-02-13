@@ -9,7 +9,7 @@ font-family: "Liberation Sans", sans-serif;
 
 body {
   font-family: 'Ubuntu', sans-serif;
-  font-size: 22px !important;
+  font-size: 20px !important;
 }
 
 .footer .icon-link {
@@ -144,3 +144,14 @@ body {
 
 
 
+.column {
+  flex-grow: 1; /* Allows columns to expand */
+}
+
+.image img {
+  width: 100%; /* Makes image take full width of the column */
+  max-width: 700px; /* Increase size limit */
+  height: auto; /* Keeps aspect ratio */
+  display: block; /* Avoids unnecessary gaps */
+  object-fit: cover;
+}
