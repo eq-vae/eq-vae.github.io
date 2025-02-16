@@ -209,7 +209,7 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     <div class="hero-body" style="width: 100%;">
       <img src="static/images/example_page/teaser.png" alt="Intro Image" id="tree" style="height: 100%; width: 100%; object-fit: cover;">
       <h2 class="subtitle has-text-left" style="font-size: 1rem; max-width: 100%; margin: auto;">
-        <strong>Latent Space Structure (Left)</strong> Top three principal components of <code>SD-VAE</code> and <code>SDXL-VAE</code>, with and without our method, demonstrating visually that our regularization produces smoother latent representations.  
+        <strong>Latent Space Structure (Left)</strong> Top three principal components of <code>SD-VAE</code> and <code>SDXL-VAE</code>, with and without our method, demonstrating visually that our regularization produces smoother latent representations without compromising reconstruction <a href="#figure-container">(See Table)</a>.  
         <strong>Accelerated Training (Right)</strong> Training curves (without classifier-free guidance) for <code>DiT-XL/2</code> and <code>REPA (w/ SiT-XL/2)</code>.
       </h2>
     </div>
@@ -567,7 +567,8 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
           trained on the latent representations on <code> EQ-VAE</code> 
           
           </p>
-          <div class="container" style="max-width: 1200px; margin: 0 auto;">
+          <!-- Container with an id for the anchor link -->
+          <div class="container" style="max-width: 1200px; margin: 0 auto;" id="figure-container">
             <div class="columns">
               <!-- First Column -->
               <div class="column">
@@ -578,10 +579,8 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
                     style="width: 120%; max-width: 700px; height: auto; object-fit: cover;"
                   />
                 </figure>
-                <h2 class="subtitle has-text-left" style="font-size: 1.2rem; margin: auto;">
-                </h2>
               </div>
-          
+
               <!-- Second Column -->
               <div class="column">
                 <figure class="image">
@@ -591,12 +590,9 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
                     style="width: 120%; max-width: 700px; height: auto; object-fit: cover;"
                   />
                 </figure>
-                <h2 class="subtitle has-text-left" style="font-size: 1.2rem; margin: auto;">
-                </h2>
               </div>
             </div>
           </div>
-          
           <p>
             
 
